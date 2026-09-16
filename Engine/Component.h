@@ -9,6 +9,8 @@ public:
 	~Component();
 
 	Entity const* GetEntity();
+	
+	virtual void Update() = 0;
 
 private:
 	Entity* m_pEntity;

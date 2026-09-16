@@ -3,6 +3,8 @@
 
 #include "Component.h"
 
+#include <Vec2.h>
+
 class Transform2D;
 class Collider : public Component
 {
@@ -14,8 +16,8 @@ public:
 	void OnCollisionExit(Collider& other);
 
 private:
-	int x;
-	int y;
+	Vec2f m_position;
+	bool m_isTrigger;
 };
 
 #endif
