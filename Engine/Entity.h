@@ -3,6 +3,9 @@
 
 #include <string>
 #include <vector>
+#include <memory>
+#include <optional>
+#include <Action.h>
 
 class Component;
 class Entity
@@ -14,12 +17,14 @@ public:
 	void Update();
 
 	template <typename T>
-	T* AddComponent(T* component);
+	std::shared_ptr<T> AddComponent();
 
 	template <typename T>
-	T* GetComponent(T* component);
+	std::optional<std::shared_ptr<T>> GetComponent() const;
 
-private:
+	Action<void()> OnUpdate;
+
+protected:
 	std::string m_name;
 	std::vector<Component*> m_components;
 };
