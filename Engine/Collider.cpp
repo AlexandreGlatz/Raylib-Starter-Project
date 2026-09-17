@@ -8,12 +8,8 @@
 
 Collider::Collider(Entity const& entity) : Component(entity), m_isTrigger(false)
 {
+	m_pEntity->CheckDependencies<0, Transform2D>(m_type);
 	std::shared_ptr<Transform2D> transform = entity.GetComponent<Transform2D>();
-	if (transform == nullptr)
-	{
-		Logger::Log(LOG_LEVEL::ERROR, "Collider cannot be created without a Transform2D Component");
-		return;
-	}
 
 	m_position = transform->GetPosition();
 }

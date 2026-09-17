@@ -8,6 +8,8 @@
 class Transform2D : public Component
 {
 public:
+	Transform2D() = default;
+
 	Transform2D(Entity const& entity);
 	Transform2D(Entity const& entity, Vec2f position, Vec2f scale);
 	~Transform2D();

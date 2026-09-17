@@ -8,6 +8,7 @@
 #include <memory>
 #include <optional>
 #include <type_traits>
+#include <tuple>
 
 #include <Action.h>
 #include <Logger.h>
@@ -29,6 +30,9 @@ public:
 
 	Action<void()> OnUpdate;
 
+	template<size_t I = 0,typename ... Args>
+	bool CheckDependencies(std::string type);
+
 protected:
 	std::string m_name;
 	std::vector<std::shared_ptr<Component>> m_components;
@@ -39,6 +43,21 @@ private:
 	bool IsComponent() const;
 
 };
+
+template<size_t I, typename ...Args>
+inline bool Entity::CheckDependencies(std::string type)
+{
+	typedef std::tuple_element<I, std::tuple<Args...>>::type currentType;
+	if (GetComponent<currentType>() == nullptr)
+	{
+		Logger::LogPrintf(LOG_LEVEL::ERROR, "Component of type %s needs a component of type %s", type, currentType::GetType());
+	}
+
+	return false;
+
+	if constexpr(I + 1 != sizeof ... (Args))
+		CheckDependencies<I + 1>();
+}
 
 template<typename T>
 inline std::shared_ptr<T> Entity::AddComponent()
