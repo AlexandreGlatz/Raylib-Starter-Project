@@ -2,6 +2,7 @@
 #include "Logger.h"
 
 #include <iostream>
+#include <cstdarg>
 
 void Logger::Log(LOG_LEVEL level, std::string message)
 {
@@ -28,3 +29,14 @@ std::string Logger::BuildMessage(LOG_LEVEL level, std::string message)
 
 	return prefix + message;
 }
+
+void Logger::LogPrintf(LOG_LEVEL level, std::string message, ...)
+{
+	va_list args;
+
+	va_start(args, message.c_str());
+	std::string builtMessage = BuildMessage(level, message);
+	std::vprintf(builtMessage.c_str(), args);
+	va_end(args);
+}
+

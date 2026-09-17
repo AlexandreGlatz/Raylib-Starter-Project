@@ -29,22 +29,20 @@ public:
 
 protected:
 	std::string m_name;
-	std::vector<Component*> m_components;
+	std::vector<std::shared_ptr<Component>> m_components;
 	
 private:
-	bool IsComponentAdded(std::string type);
+	bool IsComponentAdded(std::string type) const;
 	template<typename T>
-	bool IsComponent();
+	bool IsComponent() const;
 
 };
-
-#endif
 
 template<typename T>
 inline std::shared_ptr<T> Entity::AddComponent()
 {
 
-	if (std::is_base_of(Component, T)::value == false)
+	if (IsComponent<T>())
 	{
 		Logger::Log(LOG_LEVEL::ERROR, "Can't add a non-component to an entity");
 		return nullptr;
@@ -81,7 +79,9 @@ inline std::optional<std::shared_ptr<T>> Entity::GetComponent() const
 }
 
 template<typename T>
-inline bool Entity::IsComponent()
+inline bool Entity::IsComponent() const
 {
-	return std::is_base_of(Component, T)::value;
+	return std::is_base_of<Component, T>();
 }
+
+#endif
