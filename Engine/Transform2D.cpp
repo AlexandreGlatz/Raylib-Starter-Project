@@ -4,6 +4,7 @@
 Transform2D::Transform2D(Entity const& entity) : Component(entity)
 {
 	m_position = { 0.0f, 0.0f };
+	Transform2D::m_type = "Transform2D";
 }
 
 Transform2D::Transform2D(Entity const& entity, Vec2f position, Vec2f scale) : Component(entity)

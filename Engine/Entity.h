@@ -1,6 +1,8 @@
 #ifndef ENTITY_H_
 #define ENTITY_H_
 
+#include "Component.h"
+
 #include <string>
 #include <vector>
 #include <memory>
@@ -10,7 +12,7 @@
 #include <Action.h>
 #include <Logger.h>
 
-class Component;
+
 class Entity
 {
 public:
@@ -23,7 +25,7 @@ public:
 	std::shared_ptr<T> AddComponent();
 
 	template <typename T>
-	std::optional<std::shared_ptr<T>> GetComponent() const;
+	std::shared_ptr<T> GetComponent() const;
 
 	Action<void()> OnUpdate;
 
@@ -62,7 +64,7 @@ inline std::shared_ptr<T> Entity::AddComponent()
 }
 
 template<typename T>
-inline std::optional<std::shared_ptr<T>> Entity::GetComponent() const
+inline std::shared_ptr<T> Entity::GetComponent() const
 {
 	if (IsComponent<T>() == false)
 	{
@@ -70,12 +72,19 @@ inline std::optional<std::shared_ptr<T>> Entity::GetComponent() const
 		return nullptr;
 	}
 
-	if (IsComponentAdded(T::GetType()) == false)
+	std::string type = T::GetType();
+	if (IsComponentAdded(type) == false)
 	{
 		Logger::LogPrintf(LOG_LEVEL::ERROR, "Component of type %s doesnt exist in entity of name %s", T::GetType().c_str(), m_name.c_str());
+		return nullptr;
 	}
 
-	return std::optional<std::shared_ptr<T>>();
+	auto it = std::find_if(m_components.begin(), m_components.end(),
+		[&type](std::shared_ptr<Component> currentComponent)
+		{ return currentComponent->GetType() == type; });
+
+	return std::static_pointer_cast<T>(*it);
+
 }
 
 template<typename T>

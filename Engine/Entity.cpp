@@ -24,7 +24,7 @@ bool Entity::IsComponentAdded(std::string type) const
 {
 	auto it = std::find_if(m_components.begin(), m_components.end(), 
 		[&type](std::shared_ptr<Component> currentComponent)
-		{ return currentComponent->GetType() == type; }
+		{ return currentComponent->GetType()== type; }
 	);
 
 	return it == m_components.end();

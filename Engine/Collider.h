@@ -13,6 +13,8 @@ public:
 	Collider(Entity const& Entity);
 	~Collider();
 
+	virtual void Update();
+
 	void CollisionEnter(Collider& other);
 	void CollisionExit(Collider& other);
 

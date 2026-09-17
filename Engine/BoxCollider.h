@@ -10,6 +10,8 @@ class BoxCollider: public Collider
 public:
 	BoxCollider(Entity const& entity);
 	~BoxCollider();
+
+	virtual void Update() override;
 	
 	bool CheckCollision(BoxCollider const& other);
 

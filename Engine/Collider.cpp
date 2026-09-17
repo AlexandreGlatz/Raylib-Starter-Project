@@ -6,20 +6,25 @@
 #include <Logger.h>
 #include <memory>
 
-Collider::Collider(Entity const& entity) : Component(entity)
+Collider::Collider(Entity const& entity) : Component(entity), m_isTrigger(false)
 {
-	std::optional<std::shared_ptr<Transform2D>> transform = entity.GetComponent<Transform2D>();
-	if (transform.has_value() == false)
+	std::shared_ptr<Transform2D> transform = entity.GetComponent<Transform2D>();
+	if (transform == nullptr)
 	{
 		Logger::Log(LOG_LEVEL::ERROR, "Collider cannot be created without a Transform2D Component");
+		return;
 	}
 
-	m_position = transform.value()->GetPosition();
-
+	m_position = transform->GetPosition();
 }
 
 Collider::~Collider()
 {
+}
+
+void Collider::Update()
+{
+	Component::Update();
 }
 
 void Collider::CollisionEnter(Collider& other)

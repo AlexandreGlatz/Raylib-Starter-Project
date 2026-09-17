@@ -10,6 +10,11 @@ BoxCollider::~BoxCollider()
 {
 }
 
+void BoxCollider::Update()
+{
+	Collider::Update();
+}
+
 bool BoxCollider::CheckCollision(BoxCollider const& other)
 {
 	return m_position.x < other.m_position.x + other.m_size.x &&

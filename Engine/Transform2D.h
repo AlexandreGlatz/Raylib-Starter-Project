@@ -18,6 +18,9 @@ public:
 protected:
 	Vec2f m_position;
 	Vec2f m_scale;
+	Vec2f m_size;
+	float m_rotation;
+
 };
 
 #endif

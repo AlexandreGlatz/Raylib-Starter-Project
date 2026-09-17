@@ -1,21 +1,22 @@
-#ifndef SPRITE_H_
-#define SPRITE_H_
+#pragma once
 
 #include "Component.h"
 
-#include <Vec2.h>
+#include <filesystem>
 #include <raylib.h>
 
 class Sprite : public Component
 {
 public:
-	Sprite();
+	Sprite(Entity const& entity);
 	~Sprite();
+	
+	void Update();
 
-	void Update() override;
+	void LoadTextureFromFile(std::filesystem::path path);
+	void Display();
+
 private:
 	Texture2D m_texture;
-	Vec2f position;
 };
 
-#endif
