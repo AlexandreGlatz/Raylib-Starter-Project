@@ -8,13 +8,13 @@
 class BoxCollider: public Collider
 {
 public:
-	BoxCollider();
+	BoxCollider(Entity const& entity);
 	~BoxCollider();
 	
-	void CheckCollision(BoxCollider const& other);
+	bool CheckCollision(BoxCollider const& other);
 
-private:
-	Vec2f size;
+protected:
+	Vec2f m_size;
 };
 
 #endif

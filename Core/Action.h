@@ -55,13 +55,13 @@ inline void Action<R(Args...)>::Execute(Args ... args)
 {
 	while (m_subscribedOnceFunctions.empty() == false)
 	{
-		m_subscribedOnceFunctions.front()(std::forward<Args>(args)...);
+		m_subscribedOnceFunctions.front()(args ...);
 		m_subscribedOnceFunctions.pop();
 	}
 
 	for (int i = 0; i<m_subscribedFunctions.size(); ++i)
 	{
-		m_subscribedFunctions[i](std::forward<Args>(args)...);
+		m_subscribedFunctions[i](args ...);
 	}
 }
 
