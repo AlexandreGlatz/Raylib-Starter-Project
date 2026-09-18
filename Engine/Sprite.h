@@ -11,7 +11,7 @@ class Transform2D;
 class Sprite2D : public Component
 {
 public:
-	Sprite2D(Entity const& entity);
+	Sprite2D(Entity* pEntity);
 	~Sprite2D();
 	
 	void Update() override;

@@ -2,16 +2,18 @@
 #include "Component.h"
 #include "Entity.h"
 
-Component::Component(Entity const& entity)
+COMPONENT_TYPE Component::m_type = COMPONENT_TYPE::NONE;
+Component::Component(Entity* pEntity)
 {
-	m_pEntity = std::make_shared<Entity>(entity);
+	m_pEntity = pEntity;
 }
 
 Component::~Component()
 {
+	m_pEntity = nullptr;
 }
 
-std::shared_ptr<Entity const> Component::GetEntity() const
+Entity* Component::GetEntity() const
 {
 	return m_pEntity;
 }

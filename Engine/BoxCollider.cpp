@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "BoxCollider.h"
 
-BoxCollider::BoxCollider(Entity const& entity) : Collider(entity)
+BoxCollider::BoxCollider(Entity* pEntity) : Collider(pEntity)
 {
 	m_size = { 10.0f, 10.0f };
 }

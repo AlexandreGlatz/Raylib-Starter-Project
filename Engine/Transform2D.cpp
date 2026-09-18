@@ -1,8 +1,8 @@
 #include "pch.h"
 #include "Transform2D.h"
 
-Transform2D::Transform2D(Entity const& entity) : 
-	Component(entity),
+Transform2D::Transform2D(Entity* pEntity) : 
+	Component(pEntity),
 	m_position({0.0f, 0.0f}),
 	m_scale({ 1.0f, 1.0f }),
 	m_size({100.0f, 100.0f}),
@@ -10,8 +10,8 @@ Transform2D::Transform2D(Entity const& entity) :
 {
 }
 
-Transform2D::Transform2D(Entity const& entity, Vec2f const& position, Vec2f const& scale, Vec2f const& size, float rotation)
-	: Component(entity),
+Transform2D::Transform2D(Entity* pEntity, Vec2f const& position, Vec2f const& scale, Vec2f const& size, float rotation)
+	: Component(pEntity),
 	m_rotation(rotation),
 	m_position(position),
 	m_scale(scale),

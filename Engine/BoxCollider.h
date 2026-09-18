@@ -8,7 +8,7 @@
 class BoxCollider: public Collider
 {
 public:
-	BoxCollider(Entity const& entity);
+	BoxCollider(Entity* pEntity);
 	~BoxCollider();
 
 	virtual void Update() override;

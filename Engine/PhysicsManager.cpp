@@ -9,7 +9,7 @@ PhysicsManager::~PhysicsManager()
 {
 }
 
-void PhysicsManager()
+void PhysicsManager::Update()
 {
 
 }

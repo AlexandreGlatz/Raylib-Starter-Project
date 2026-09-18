@@ -38,7 +38,9 @@ inline std::shared_ptr<T> Scene::AddComponent(std::shared_ptr<Entity> const& pEn
 	if (newComponent == nullptr)
 		return nullptr;
 
-	m_components[T::GetType()] = newComponent;
+	m_components[static_cast<uint8_t>(T::GetType())].push_back(dynamic_pointer_cast<Component>(newComponent));
+
+	return newComponent;
 }
 #endif
 

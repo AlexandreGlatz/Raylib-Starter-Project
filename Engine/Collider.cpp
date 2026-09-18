@@ -6,11 +6,11 @@
 #include <Logger.h>
 #include <memory>
 
-Collider::Collider(Entity const& entity) : Component(entity), m_isTrigger(false)
+Collider::Collider(Entity* pEntity) : Component(pEntity), m_isTrigger(false)
 {
 	m_pEntity->CheckDependencies<0, Transform2D>(GetTypeStr());
-	std::shared_ptr<Transform2D> transform = entity.GetComponent<Transform2D>();
 
+	std::shared_ptr<Transform2D> transform = pEntity->GetComponent<Transform2D>();
 	m_position = transform->GetPosition();
 }
 

@@ -9,8 +9,8 @@ class Transform2D : public Component
 {
 public:
 
-	Transform2D(Entity const& entity);
-	Transform2D(Entity const& entity, Vec2f const& position, Vec2f const& scale, Vec2f const& size, float rotation);
+	Transform2D(Entity* pEntity);
+	Transform2D(Entity* pEntity, Vec2f const& position, Vec2f const& scale, Vec2f const& size, float rotation);
 	~Transform2D();
 
 	void Update() override;

@@ -10,7 +10,7 @@ class Transform2D;
 class Collider : public Component
 {
 public:
-	Collider(Entity const& Entity);
+	Collider(Entity* pEntity);
 	~Collider();
 
 	virtual void Update();

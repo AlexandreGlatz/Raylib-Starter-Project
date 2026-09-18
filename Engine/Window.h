@@ -7,7 +7,7 @@
 class Window
 {
 public:
-	Window(float width, float height, std::string name);
+	Window(int width, int height, std::string name);
 	~Window();
 
 	void SetTargetFPS(int target);
@@ -16,7 +16,7 @@ public:
 	bool IsOpen();
 
 private:
-	Vec2f m_size;
+	Vec2i m_size;
 	std::string m_name;
 };
 

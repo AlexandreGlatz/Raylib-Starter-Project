@@ -71,7 +71,7 @@ inline std::shared_ptr<T> Entity::AddComponent()
 
 	std::shared_ptr<T> pNewComponent = std::make_shared<T>(this);
 
-	std::string newComponentType = pNewComponent.GetType();
+	std::string newComponentType = pNewComponent->GetTypeStr();
 	if (IsComponentAdded(newComponentType))
 	{
 		Logger::LogPrintf(LOG_LEVEL::ERROR, "Component of Type %s already exists in Entity of name %s", newComponentType.c_str(), m_name.c_str());

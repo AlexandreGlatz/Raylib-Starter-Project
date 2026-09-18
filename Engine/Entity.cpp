@@ -2,7 +2,7 @@
 #include "Entity.h"
 #include "Component.h"
 
-
+int Entity::id = 0;
 Entity::Entity() : m_name("Entity" + std::to_string(id))
 {
 	id++;

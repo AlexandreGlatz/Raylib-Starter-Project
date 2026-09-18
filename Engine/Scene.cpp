@@ -9,6 +9,10 @@ Scene::~Scene()
 {
 }
 
+void Scene::Load()
+{
+}
+
 void Scene::Update()
 {
 	for (std::vector<std::shared_ptr<Component>> components : m_components)
@@ -18,6 +22,10 @@ void Scene::Update()
 			component->Update();
 		}
 	}
+}
+
+void Scene::Unload()
+{
 }
 
 std::shared_ptr<Entity> Scene::CreateEntity()

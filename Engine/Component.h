@@ -21,10 +21,10 @@ class Entity;
 class Component
 {
 public:
-	Component(Entity const& entity);
+	Component(Entity* entity);
 	~Component();
 
-	std::shared_ptr<Entity const> GetEntity() const;
+	Entity* GetEntity() const;
 	
 	virtual void Update();
 	static std::string GetTypeStr();
@@ -32,11 +32,10 @@ public:
 	static void SetType(COMPONENT_TYPE type);
 
 protected:
-
 	void DisplayDependencyError(std::string type);
 
 protected:
-	std::shared_ptr<Entity> m_pEntity;
+	Entity* m_pEntity;
 	static COMPONENT_TYPE m_type;
 };
 

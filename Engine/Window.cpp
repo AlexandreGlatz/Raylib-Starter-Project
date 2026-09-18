@@ -3,7 +3,7 @@
 
 #include <raylib.h>
 
-Window::Window(float width, float height, std::string name)
+Window::Window(int width, int height, std::string name)
 	: m_size({ width, height }),
 	m_name(name)
 {
