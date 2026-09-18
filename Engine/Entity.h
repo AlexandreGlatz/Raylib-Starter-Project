@@ -13,14 +13,12 @@
 #include <Action.h>
 #include <Logger.h>
 
-
 class Entity
 {
 public:
 	Entity();
+	Entity(std::string name);
 	~Entity();
-
-	void Update();
 
 	template <typename T>
 	std::shared_ptr<T> AddComponent();
@@ -28,12 +26,14 @@ public:
 	template <typename T>
 	std::shared_ptr<T> GetComponent() const;
 
-	Action<void()> OnUpdate;
-
 	template<size_t I = 0,typename ... Args>
 	bool CheckDependencies(std::string type);
 
+	void SetName(std::string name);
+	std::string GetName() const;
+
 protected:
+	static int id;
 	std::string m_name;
 	std::vector<std::shared_ptr<Component>> m_components;
 	
@@ -91,16 +91,16 @@ inline std::shared_ptr<T> Entity::GetComponent() const
 		return nullptr;
 	}
 
-	std::string type = T::GetType();
+	std::string type = T::GetTypeStr();
 	if (IsComponentAdded(type) == false)
 	{
-		Logger::LogPrintf(LOG_LEVEL::ERROR, "Component of type %s doesnt exist in entity of name %s", T::GetType().c_str(), m_name.c_str());
+		Logger::LogPrintf(LOG_LEVEL::ERROR, "Component of type %s does'nt exist in entity of name %s", T::GetTypeStr().c_str(), m_name.c_str());
 		return nullptr;
 	}
 
 	auto it = std::find_if(m_components.begin(), m_components.end(),
 		[&type](std::shared_ptr<Component> currentComponent)
-		{ return currentComponent->GetType() == type; });
+		{ return currentComponent->GetTypeStr() == type; });
 
 	return std::static_pointer_cast<T>(*it);
 

@@ -6,18 +6,30 @@
 #include<Action.h>
 #include<string>
 
+
+enum class COMPONENT_TYPE : char
+{
+	NONE,
+	SPRITE_2D,
+	BOX_COLLIDER,
+	TRANSFORM_2D,
+
+	COMPONENT_COUNT
+};
+
 class Entity;
 class Component
 {
 public:
-	Component() = default;
 	Component(Entity const& entity);
 	~Component();
 
 	std::shared_ptr<Entity const> GetEntity() const;
 	
 	virtual void Update();
-	static std::string GetType();
+	static std::string GetTypeStr();
+	static COMPONENT_TYPE GetType();
+	static void SetType(COMPONENT_TYPE type);
 
 protected:
 
@@ -25,7 +37,7 @@ protected:
 
 protected:
 	std::shared_ptr<Entity> m_pEntity;
-	static std::string m_type;
+	static COMPONENT_TYPE m_type;
 };
 
 #endif

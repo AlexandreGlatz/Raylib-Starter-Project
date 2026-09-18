@@ -2,7 +2,13 @@
 #include "Entity.h"
 #include "Component.h"
 
-Entity::Entity()
+
+Entity::Entity() : m_name("Entity" + std::to_string(id))
+{
+	id++;
+}
+
+Entity::Entity(std::string name) : m_name(name)
 {
 }
 
@@ -10,21 +16,22 @@ Entity::~Entity()
 {
 }
 
-void Entity::Update()
+void Entity::SetName(std::string name)
 {
-	OnUpdate.Execute();
+	m_name = name;
+}
 
-	for (int i = 0; i < m_components.size(); ++i)
-	{
-		m_components[i]->Update();
-	}
+std::string Entity::GetName() const
+{
+	return m_name;
 }
 
 bool Entity::IsComponentAdded(std::string type) const
 {
 	auto it = std::find_if(m_components.begin(), m_components.end(), 
 		[&type](std::shared_ptr<Component> currentComponent)
-		{ return currentComponent->GetType()== type; }
+		{ if (currentComponent == nullptr) return false; return currentComponent->GetTypeStr() == type; }
+
 	);
 
 	return it == m_components.end();

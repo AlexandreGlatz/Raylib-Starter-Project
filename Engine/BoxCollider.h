@@ -8,7 +8,6 @@
 class BoxCollider: public Collider
 {
 public:
-	BoxCollider() = default;
 	BoxCollider(Entity const& entity);
 	~BoxCollider();
 

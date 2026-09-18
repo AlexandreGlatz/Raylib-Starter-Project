@@ -8,14 +8,22 @@
 class Transform2D : public Component
 {
 public:
-	Transform2D() = default;
 
 	Transform2D(Entity const& entity);
-	Transform2D(Entity const& entity, Vec2f position, Vec2f scale);
+	Transform2D(Entity const& entity, Vec2f const& position, Vec2f const& scale, Vec2f const& size, float rotation);
 	~Transform2D();
+
+	void Update() override;
+
+	void SetPosition(Vec2f const& position);
+	void SetScale(Vec2f const& scale);
+	void SetSize(Vec2f const& size);
+	void SetRotation(float rotation);
 
 	Vec2f GetPosition() const;
 	Vec2f GetScale() const;
+	Vec2f GetSize() const;
+	float GetRotation() const;
 
 protected:
 	Vec2f m_position;
