@@ -8,7 +8,7 @@
 
 Collider::Collider(Entity* pEntity) : Component(pEntity), m_isTrigger(false)
 {
-	m_pEntity->CheckDependencies<0, Transform2D>(GetTypeStr());
+	m_pEntity->CheckDependencies<0, Transform2D>(GetTypeStr(GetType()));
 
 	std::shared_ptr<Transform2D> transform = pEntity->GetComponent<Transform2D>();
 	m_position = transform->GetPosition();

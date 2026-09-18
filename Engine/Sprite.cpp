@@ -2,11 +2,12 @@
 #include "Sprite.h"
 #include "Entity.h"
 #include "Transform2D.h"
+#include <string>
 
 Sprite2D::Sprite2D(Entity* pEntity) : Component(pEntity), m_texture()
 {
 	m_pEntity = pEntity;
-	m_pEntity->CheckDependencies<0, Transform2D>(GetTypeStr());
+	m_pEntity->CheckDependencies<0, Transform2D>(GetTypeStr(GetType()));
 
 	m_pTransform = m_pEntity->GetComponent<Transform2D>();
 
@@ -17,6 +18,11 @@ Sprite2D::~Sprite2D()
 {
 }
 
+COMPONENT_TYPE Sprite2D::GetType()
+{ 
+	return COMPONENT_TYPE::SPRITE_2D;
+}
+
 void Sprite2D::Update()
 {
 	Display();
@@ -24,7 +30,8 @@ void Sprite2D::Update()
 
 void Sprite2D::LoadTextureFromFile(std::filesystem::path path)
 {
-	m_texture = LoadTexture(path.string().c_str());
+	std::string filePath = path.string();
+	m_texture = LoadTexture(filePath.c_str());//path.string().c_str());
 }
 
 void Sprite2D::Display()

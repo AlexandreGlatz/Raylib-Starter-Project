@@ -3,6 +3,7 @@
 
 Scene::Scene()
 {
+	m_components.resize(static_cast<uint8_t>(COMPONENT_TYPE::COMPONENT_COUNT));
 }
 
 Scene::~Scene()

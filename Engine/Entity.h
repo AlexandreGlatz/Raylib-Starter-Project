@@ -50,7 +50,7 @@ inline bool Entity::CheckDependencies(std::string type)
 	typedef std::tuple_element<I, std::tuple<Args...>>::type currentType;
 	if (GetComponent<currentType>() == nullptr)
 	{
-		Logger::LogPrintf(LOG_LEVEL::ERROR, "Component of type %s needs a component of type %s", type, currentType::GetType());
+		Logger::LogPrintf(LOG_LEVEL::ERROR, "Component of type %s needs a component of type %s", type, currentType::GetTypeStr(currentType::GetType()));
 	}
 
 	return false;
@@ -63,7 +63,7 @@ template<typename T>
 inline std::shared_ptr<T> Entity::AddComponent()
 {
 
-	if (IsComponent<T>())
+	if (IsComponent<T>() == false)
 	{
 		Logger::Log(LOG_LEVEL::ERROR, "Can't add a non-component to an entity");
 		return nullptr;
@@ -71,12 +71,12 @@ inline std::shared_ptr<T> Entity::AddComponent()
 
 	std::shared_ptr<T> pNewComponent = std::make_shared<T>(this);
 
-	std::string newComponentType = pNewComponent->GetTypeStr();
-	if (IsComponentAdded(newComponentType))
-	{
-		Logger::LogPrintf(LOG_LEVEL::ERROR, "Component of Type %s already exists in Entity of name %s", newComponentType.c_str(), m_name.c_str());
-		return nullptr;
-	}
+	std::string newComponentType = pNewComponent->GetTypeStr(pNewComponent->GetType());
+	//if (IsComponentAdded(newComponentType))
+	//{
+	//	Logger::LogPrintf(LOG_LEVEL::ERROR, "Component of Type %s already exists in Entity of name %s", newComponentType.c_str(), m_name.c_str());
+	//	return nullptr;
+	//}
 
 	m_components.push_back(pNewComponent);
 	return pNewComponent;
@@ -91,18 +91,22 @@ inline std::shared_ptr<T> Entity::GetComponent() const
 		return nullptr;
 	}
 
-	std::string type = T::GetTypeStr();
+	/*std::string type = T::GetTypeStr(T::GetType());
 	if (IsComponentAdded(type) == false)
 	{
-		Logger::LogPrintf(LOG_LEVEL::ERROR, "Component of type %s does'nt exist in entity of name %s", T::GetTypeStr().c_str(), m_name.c_str());
+		Logger::LogPrintf(LOG_LEVEL::ERROR, "Component of type %s does'nt exist in entity of name %s", T::GetTypeStr(T::GetType()).c_str(), m_name.c_str());
 		return nullptr;
+	}*/
+
+	for (int i = 0; i < m_components.size(); ++i)
+	{
+		std::shared_ptr<T> pComponent = dynamic_pointer_cast<T>(m_components[i]);
+		if (pComponent != nullptr)
+			return pComponent;
 	}
 
-	auto it = std::find_if(m_components.begin(), m_components.end(),
-		[&type](std::shared_ptr<Component> currentComponent)
-		{ return currentComponent->GetTypeStr() == type; });
-
-	return std::static_pointer_cast<T>(*it);
+	Logger::LogPrintf(LOG_LEVEL::ERROR, "Component of type %s does'nt exist in entity of name %s", T::GetTypeStr(T::GetType()).c_str(), m_name.c_str());
+	return nullptr;
 
 }
 

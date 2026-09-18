@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <string>
+#include <raylib.h>
 
 class Window;
 class Scene;
@@ -20,13 +21,18 @@ public:
 	std::shared_ptr<Scene> CreateScene();
 	void SetActiveScene(std::shared_ptr<Scene> pScene);
 
+	void SetClearColor(Color clearColor);
+	
 	std::shared_ptr<Window> CreateWindow(int width, int height, std::string name);
 	void OpenWindow();
 	bool IsWindowOpen();
+	void SetTargetFPS(int target);
+	void CloseGameWindow();
 
 private:
 	std::shared_ptr<Scene> m_pActiveScene;
 	std::shared_ptr<Window> m_pWindow;
+	Color m_clearColor;
 
 };
 

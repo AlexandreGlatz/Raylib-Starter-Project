@@ -14,6 +14,7 @@ public:
 
 	void Open();
 	bool IsOpen();
+	void Close();
 
 private:
 	Vec2i m_size;

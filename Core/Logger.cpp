@@ -27,7 +27,7 @@ std::string Logger::BuildMessage(LOG_LEVEL level, std::string message)
 		break;
 	}
 
-	return prefix + message;
+	return prefix + message + "\n";
 }
 
 void Logger::LogPrintf(LOG_LEVEL level, std::string message, ...)

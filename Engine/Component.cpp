@@ -2,7 +2,6 @@
 #include "Component.h"
 #include "Entity.h"
 
-COMPONENT_TYPE Component::m_type = COMPONENT_TYPE::NONE;
 Component::Component(Entity* pEntity)
 {
 	m_pEntity = pEntity;
@@ -22,9 +21,9 @@ void Component::Update()
 {
 }
 
-std::string Component::GetTypeStr()
+std::string Component::GetTypeStr(COMPONENT_TYPE type)
 {
-	switch (m_type)
+	switch (type)
 	{
 	case COMPONENT_TYPE::BOX_COLLIDER:
 		return "BOX_COLLIDER";
@@ -39,17 +38,12 @@ std::string Component::GetTypeStr()
 
 COMPONENT_TYPE Component::GetType()
 {
-	return m_type;
-}
-
-void Component::SetType(COMPONENT_TYPE type)
-{
-	m_type = type;
+	return COMPONENT_TYPE::NONE;
 }
 
 void Component::DisplayDependencyError(std::string type)
 {
-	Logger::LogPrintf(LOG_LEVEL::ERROR, "%s cannot be created without a %s Component", GetTypeStr().c_str(), type.c_str());
+	Logger::LogPrintf(LOG_LEVEL::ERROR, "%s cannot be created without a %s Component", GetTypeStr(GetType()).c_str(), type.c_str());
 }
 
 

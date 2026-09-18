@@ -1,6 +1,7 @@
 #include <GameManager.h>
 #include <Scene.h>
 #include <Sprite.h>
+#include <Transform2D.h>
 
 #include <memory>
 
@@ -10,15 +11,27 @@ using sptr = std::shared_ptr<T>;
 int main() {
     GameManager GM;
 
-    GM.CreateWindow(100, 100, "Game");
+    GM.Initialize();
+    GM.CreateWindow(1280, 720, "Game");
     GM.OpenWindow();
+   
 
     sptr<Scene> pScene = GM.CreateScene();
 
-    sptr<Entity> entity1 = pScene->CreateEntity("entity1");
-    pScene->AddComponent<Sprite2D>(entity1);
+    sptr<Entity> pEntity1 = pScene->CreateEntity("entity1");
+    sptr<Transform2D> pTransform = pScene->AddComponent<Transform2D>(pEntity1);
+    pTransform->SetPosition({0.0f, 0.0f});
+
+    sptr<Sprite2D> pSprite = pScene->AddComponent<Sprite2D>(pEntity1);
+    pSprite->LoadTextureFromFile("resources/Textures/texture2.png");
 
     
+    GM.SetActiveScene(pScene);
+
+    while (GM.IsWindowOpen())
+    {
+        GM.Update();
+    }
 
 
     //

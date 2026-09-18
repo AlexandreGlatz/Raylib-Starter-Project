@@ -22,7 +22,7 @@ public:
 	std::shared_ptr<Entity> CreateEntity(std::string name);
 
 	template <typename T>
-	std::shared_ptr<T> AddComponent(std::shared_ptr<Entity> const& pEntity);
+	std::shared_ptr<T> AddComponent(std::shared_ptr<Entity> pEntity);
 
 private:
 	std::vector<std::vector<std::shared_ptr<Component>>> m_components;
@@ -30,7 +30,7 @@ private:
 
 
 template<typename T>
-inline std::shared_ptr<T> Scene::AddComponent(std::shared_ptr<Entity> const& pEntity)
+inline std::shared_ptr<T> Scene::AddComponent(std::shared_ptr<Entity> pEntity)
 {
 
 	std::shared_ptr<T> newComponent = pEntity->AddComponent<T>();
@@ -38,6 +38,7 @@ inline std::shared_ptr<T> Scene::AddComponent(std::shared_ptr<Entity> const& pEn
 	if (newComponent == nullptr)
 		return nullptr;
 
+	COMPONENT_TYPE type = T::GetType();
 	m_components[static_cast<uint8_t>(T::GetType())].push_back(dynamic_pointer_cast<Component>(newComponent));
 
 	return newComponent;

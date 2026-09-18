@@ -28,3 +28,8 @@ bool Window::IsOpen()
 	return WindowShouldClose() == false;
 }
 
+void Window::Close()
+{
+	CloseWindow();
+}
+

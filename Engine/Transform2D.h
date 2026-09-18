@@ -25,6 +25,8 @@ public:
 	Vec2f GetSize() const;
 	float GetRotation() const;
 
+	static COMPONENT_TYPE GetType();
+
 protected:
 	Vec2f m_position;
 	Vec2f m_scale;

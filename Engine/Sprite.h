@@ -21,6 +21,8 @@ public:
 
 	void SetOrigin(Vec2f const& origin);
 
+	static COMPONENT_TYPE GetType();
+
 private:
 	Texture2D m_texture;
 	std::shared_ptr<Transform2D> m_pTransform;

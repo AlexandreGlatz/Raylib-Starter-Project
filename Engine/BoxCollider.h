@@ -15,6 +15,8 @@ public:
 	
 	bool CheckCollision(BoxCollider const& other);
 
+	static COMPONENT_TYPE GetType();
+
 protected:
 	Vec2f m_size;
 };

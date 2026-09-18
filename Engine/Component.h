@@ -27,16 +27,14 @@ public:
 	Entity* GetEntity() const;
 	
 	virtual void Update();
-	static std::string GetTypeStr();
+	static std::string GetTypeStr(COMPONENT_TYPE type);
 	static COMPONENT_TYPE GetType();
-	static void SetType(COMPONENT_TYPE type);
 
 protected:
 	void DisplayDependencyError(std::string type);
 
 protected:
 	Entity* m_pEntity;
-	static COMPONENT_TYPE m_type;
 };
 
 #endif

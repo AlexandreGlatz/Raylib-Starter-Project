@@ -8,6 +8,7 @@
 
 GameManager::GameManager()
 {
+	m_clearColor = RED;
 }
 
 GameManager::~GameManager()
@@ -16,15 +17,14 @@ GameManager::~GameManager()
 
 void GameManager::Initialize()
 {
-	Sprite2D::SetType	(COMPONENT_TYPE::SPRITE_2D);
-	Component::SetType	(COMPONENT_TYPE::NONE);
-	Transform2D::SetType(COMPONENT_TYPE::TRANSFORM_2D);
-	BoxCollider::SetType(COMPONENT_TYPE::BOX_COLLIDER);
 }
 
 void GameManager::Update()
 {
+	BeginDrawing();
+	ClearBackground(m_clearColor);
 	m_pActiveScene->Update();
+	EndDrawing();
 }
 
 std::shared_ptr<Scene> GameManager::CreateScene()
@@ -38,6 +38,11 @@ void GameManager::SetActiveScene(std::shared_ptr<Scene> pScene)
 		m_pActiveScene->Unload();
 	m_pActiveScene = pScene;
 	m_pActiveScene->Load();
+}
+
+void GameManager::SetClearColor(Color clearColor)
+{
+	m_clearColor = clearColor;
 }
 
 std::shared_ptr<Window> GameManager::CreateWindow(int width, int height, std::string name)
@@ -54,6 +59,16 @@ void GameManager::OpenWindow()
 bool GameManager::IsWindowOpen()
 {
 	return m_pWindow->IsOpen();
+}
+
+void GameManager::SetTargetFPS(int target)
+{
+	m_pWindow->SetTargetFPS(target);
+}
+
+void GameManager::CloseGameWindow()
+{
+	m_pWindow->Close();
 }
 
 

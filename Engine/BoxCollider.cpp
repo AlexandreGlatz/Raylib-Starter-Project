@@ -15,6 +15,11 @@ void BoxCollider::Update()
 	Collider::Update();
 }
 
+COMPONENT_TYPE BoxCollider::GetType()
+{
+	return COMPONENT_TYPE::BOX_COLLIDER;
+}
+
 bool BoxCollider::CheckCollision(BoxCollider const& other)
 {
 	return m_position.x < other.m_position.x + other.m_size.x &&

@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Transform2D.h"
 
+
 Transform2D::Transform2D(Entity* pEntity) : 
 	Component(pEntity),
 	m_position({0.0f, 0.0f}),
@@ -21,6 +22,11 @@ Transform2D::Transform2D(Entity* pEntity, Vec2f const& position, Vec2f const& sc
 
 void Transform2D::Update()
 {
+}
+
+COMPONENT_TYPE Transform2D::GetType()
+{
+	return COMPONENT_TYPE::TRANSFORM_2D;
 }
 
 Transform2D::~Transform2D()
