@@ -6,7 +6,6 @@
 
 Sprite2D::Sprite2D(Entity* pEntity) : Component(pEntity), m_texture()
 {
-	m_pEntity = pEntity;
 	m_pEntity->CheckDependencies<0, Transform2D>(GetTypeStr(GetType()));
 
 	m_pTransform = m_pEntity->GetComponent<Transform2D>();
@@ -27,11 +26,9 @@ void Sprite2D::Update()
 {
 	Display();
 }
-
-void Sprite2D::LoadTextureFromFile(std::filesystem::path path)
+void Sprite2D::SetTexture(Texture const& texture)
 {
-	std::string filePath = path.string();
-	m_texture = LoadTexture(filePath.c_str());//path.string().c_str());
+	m_texture = texture;
 }
 
 void Sprite2D::Display()

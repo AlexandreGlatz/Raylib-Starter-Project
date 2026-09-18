@@ -148,6 +148,8 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Transform2D.h" />
+    <ClInclude Include="UIElement.h" />
+    <ClInclude Include="UIText.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
@@ -166,6 +168,8 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Transform2D.cpp" />
+    <ClCompile Include="UIElement.cpp" />
+    <ClCompile Include="UIText.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

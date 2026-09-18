@@ -16,7 +16,7 @@ public:
 	
 	void Update() override;
 
-	void LoadTextureFromFile(std::filesystem::path path);
+	void SetTexture(Texture const& texture);
 	void Display();
 
 	void SetOrigin(Vec2f const& origin);

@@ -4,6 +4,7 @@
 #include <memory>
 #include <string>
 #include <raylib.h>
+#include <filesystem>
 
 class Window;
 class Scene;
@@ -24,10 +25,14 @@ public:
 	void SetClearColor(Color clearColor);
 	
 	std::shared_ptr<Window> CreateWindow(int width, int height, std::string name);
+
 	void OpenWindow();
 	bool IsWindowOpen();
 	void SetTargetFPS(int target);
 	void CloseGameWindow();
+
+	Texture LoadTextureFromFile(std::filesystem::path path);
+	Font LoadFontFromFile(std::filesystem::path path);
 
 private:
 	std::shared_ptr<Scene> m_pActiveScene;

@@ -25,6 +25,12 @@
     <Filter Include="Header Files\Components\Colliders">
       <UniqueIdentifier>{068eb62b-e15e-4c78-a685-edc5075e0fd5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Components\UI">
+      <UniqueIdentifier>{df3c676a-5ecd-4a4c-af84-2035fe3cb53c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\UI">
+      <UniqueIdentifier>{3b60ea7d-a865-4064-969f-f3c6573820e1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -48,9 +54,6 @@
     <ClInclude Include="Transform2D.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Sprite.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GameManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -62,6 +65,15 @@
     </ClInclude>
     <ClInclude Include="Window.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="UIElement.h">
+      <Filter>Header Files\Components\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIText.h">
+      <Filter>Header Files\Components\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -83,9 +95,6 @@
     <ClCompile Include="Transform2D.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Sprite.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GameManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -97,6 +106,15 @@
     </ClCompile>
     <ClCompile Include="Window.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="UIElement.cpp">
+      <Filter>Source Files\Components\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIText.cpp">
+      <Filter>Source Files\Components\UI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

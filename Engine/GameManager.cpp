@@ -45,6 +45,20 @@ void GameManager::SetClearColor(Color clearColor)
 	m_clearColor = clearColor;
 }
 
+Texture GameManager::LoadTextureFromFile(std::filesystem::path path)
+{
+	std::string filePath = path.string();
+	return LoadTexture(filePath.c_str());
+}
+
+Font GameManager::LoadFontFromFile(std::filesystem::path path)
+{	
+	std::string filePath = path.string();
+	return LoadFont(filePath.c_str());
+}
+
+
+
 std::shared_ptr<Window> GameManager::CreateWindow(int width, int height, std::string name)
 {
 	m_pWindow = std::make_shared<Window>(width, height, name);
