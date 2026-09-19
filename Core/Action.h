@@ -18,13 +18,15 @@ public:
 	Action();
 	~Action();
 
-	void Subscribe(R* (*func)(Args ...));
-	void SubscribeOnce(R* (*func)(Args ...));
-	void Execute(Args ...);
+	void Subscribe(R (*func)(Args ...));
+	void SubscribeOnce(R (*func)(Args ...));
+	void Invoke(Args ...);
+
+	void operator()(Args ...);
 
 private:
-	std::vector<R* (*)(Args ...)> m_subscribedFunctions;
-	std::queue<R* (*)(Args ...)> m_subscribedOnceFunctions;
+	std::vector<R (*)(Args ...)> m_subscribedFunctions;
+	std::queue<R (*)(Args ...)> m_subscribedOnceFunctions;
 
 };
 
@@ -39,19 +41,19 @@ inline Action<R(Args...)>::~Action()
 }
 
 template<class R, class ...Args>
-inline void Action<R(Args...)>::Subscribe(R* (*func)(Args ...))
+inline void Action<R(Args...)>::Subscribe(R (*func)(Args ...))
 {
 	m_subscribedFunctions.push_back(func);
 }
 
 template<class R, class ...Args>
-inline void Action<R(Args...)>::SubscribeOnce(R* (*func)(Args...))
+inline void Action<R(Args...)>::SubscribeOnce(R (*func)(Args...))
 {
 	m_subscribedOnceFunctions.push(func);
 }
 
 template<class R, class ...Args>
-inline void Action<R(Args...)>::Execute(Args ... args)
+inline void Action<R(Args...)>::Invoke(Args ... args)
 {
 	while (m_subscribedOnceFunctions.empty() == false)
 	{
@@ -63,6 +65,12 @@ inline void Action<R(Args...)>::Execute(Args ... args)
 	{
 		m_subscribedFunctions[i](args ...);
 	}
+}
+
+template<typename R, typename ...Args>
+inline void Action<R(Args...)>::operator()(Args ... args)
+{
+	Invoke(args ...);
 }
 
 #endif

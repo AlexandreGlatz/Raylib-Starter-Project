@@ -7,7 +7,7 @@
 void Logger::Log(LOG_LEVEL level, std::string message)
 {
 
-	std::cout << BuildMessage(level, message) << std::endl;
+	std::cout << BuildMessage(level, message);
 }
 
 std::string Logger::BuildMessage(LOG_LEVEL level, std::string message)
