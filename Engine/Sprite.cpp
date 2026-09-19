@@ -4,7 +4,7 @@
 #include "Transform2D.h"
 #include <string>
 
-Sprite2D::Sprite2D(Entity* pEntity) : Component(pEntity), m_texture()
+Sprite2D::Sprite2D(Entity* pEntity) : Component(pEntity) 
 {
 	m_pEntity->CheckDependencies<0, Transform2D>(GetTypeStr(GetType()));
 
@@ -26,9 +26,9 @@ void Sprite2D::Update()
 {
 	Display();
 }
-void Sprite2D::SetTexture(Texture const& texture)
+void Sprite2D::SetTexture(Texture2D const* pTexture)
 {
-	m_texture = texture;
+	m_pTexture = pTexture;
 }
 
 void Sprite2D::Display()
@@ -38,9 +38,9 @@ void Sprite2D::Display()
 	Vec2f size = m_pTransform->GetSize();
 	Vec2f scale = m_pTransform->GetScale();
 
-	Rectangle sourceRectangle = { 0.0f, 0.0f, float(m_texture.width), float(m_texture.height) };
+	Rectangle sourceRectangle = { 0.0f, 0.0f, float(m_pTexture->width), float(m_pTexture->height) };
 	Rectangle destRectangle = { position.x, position.y, size.x * scale.x, size.y * scale.y };
-	DrawTexturePro(m_texture, sourceRectangle, destRectangle, Vector2(m_origin.x, m_origin.y), rotation, WHITE);
+	DrawTexturePro(*m_pTexture, sourceRectangle, destRectangle, Vector2(m_origin.x, m_origin.y), rotation, WHITE);
 }
 
 void Sprite2D::SetOrigin(Vec2f const& origin)

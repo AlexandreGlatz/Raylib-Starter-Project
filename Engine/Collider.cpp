@@ -25,10 +25,10 @@ void Collider::Update()
 
 void Collider::CollisionEnter(Collider& other)
 {
-	OnCollisionEnter.Execute(other);
+	OnCollisionEnter.Invoke(other);
 }
 
 void Collider::CollisionExit(Collider& other)
 {
-	OnCollisionExit.Execute(other);
+	OnCollisionExit.Invoke(other);
 }

@@ -31,9 +31,6 @@ public:
 	void SetTargetFPS(int target);
 	void CloseGameWindow();
 
-	Texture LoadTextureFromFile(std::filesystem::path path);
-	Font LoadFontFromFile(std::filesystem::path path);
-
 private:
 	std::shared_ptr<Scene> m_pActiveScene;
 	std::shared_ptr<Window> m_pWindow;

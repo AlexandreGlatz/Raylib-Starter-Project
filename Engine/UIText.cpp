@@ -15,7 +15,7 @@ void UIText::Update()
 {
 	Vec2f position = m_pTransform->GetPosition();
 	float rotation = m_pTransform->GetRotation();
-	DrawTextPro(m_attributes.font, m_text.c_str(), Vector2(position.x, position.y), Vector2(m_origin.x, m_origin.y), 
+	DrawTextPro(*m_attributes.pFont, m_text.c_str(), Vector2(position.x, position.y), Vector2(m_origin.x, m_origin.y), 
 		rotation, m_attributes.fontSize, m_attributes.spacing, m_attributes.color);
 }
 

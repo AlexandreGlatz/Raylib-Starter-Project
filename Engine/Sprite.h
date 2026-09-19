@@ -16,7 +16,7 @@ public:
 	
 	void Update() override;
 
-	void SetTexture(Texture const& texture);
+	void SetTexture(Texture2D const* pTexture);
 	void Display();
 
 	void SetOrigin(Vec2f const& origin);
@@ -24,7 +24,7 @@ public:
 	static COMPONENT_TYPE GetType();
 
 private:
-	Texture2D m_texture;
+	Texture2D const* m_pTexture;
 	std::shared_ptr<Transform2D> m_pTransform;
 	Vec2f m_origin;
 };

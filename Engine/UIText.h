@@ -9,7 +9,7 @@
 
 struct TextAttributes
 {
-	Font font;
+	Font const* pFont;
 	Color color;
 	float fontSize;
 	float spacing;
