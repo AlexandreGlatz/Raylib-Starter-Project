@@ -17,9 +17,13 @@ void UIButton::Update()
 	if (IsMouseInside())
 	{ 
 		OnHover();
+		SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 			OnClick();
+
+		return;
 	}
+	SetMouseCursor(MOUSE_CURSOR_DEFAULT);
 }
 
 bool UIButton::IsMouseInside()

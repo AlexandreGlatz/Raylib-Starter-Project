@@ -58,7 +58,7 @@ int main() {
     sptr<Texture2D> texture2 = AssetLoader::GetTexture("texture2");
     pButtonSprite->SetTexture(texture2.get());
 
-    //pButtonButton->OnHover.Subscribe(OnButtonHover);
+    pButtonButton->OnHover.Subscribe(OnButtonHover);
     pButtonButton->OnClick.Subscribe(OnButtonClick);
 
     TextAttributes attrib =
@@ -79,6 +79,8 @@ int main() {
     {
         GM.Update();
     }
+
+    AssetLoader::UnloadAll();
 
     GM.CloseGameWindow();
 
